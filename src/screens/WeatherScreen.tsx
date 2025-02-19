@@ -1,10 +1,17 @@
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {FC} from 'react';
+import SearchBar from '../components/SearchBar.tsx';
+import {background, onBackground} from '../../constants.ts';
+import {useAppSelector} from '../redux/app/hooks.ts';
 
 const WeatherScreen: FC = () => {
+  const {selectedCityName} = useAppSelector(state => state.weatherSlice);
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <Text style={styles.text}>WeatherApp</Text>
+      <View style={styles.container}>
+        <SearchBar />
+        <Text style={styles.text}>{selectedCityName}</Text>
+      </View>
     </SafeAreaView>
   );
 };
@@ -12,12 +19,16 @@ const WeatherScreen: FC = () => {
 const styles = StyleSheet.create({
   safeAreaView: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: background,
+  },
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    padding: 16,
   },
   text: {
-    color: 'black',
+    color: onBackground,
   },
 });
 
