@@ -5,23 +5,22 @@ import {
   FlatList,
   Platform,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import {SvgXml} from 'react-native-svg';
-import searchIconFunction from '../assets/icons/searchIcon.ts';
+import searchIconFunction from '../../assets/icons/searchIcon.ts';
 import {
   borderRadius,
-  surface,
-  onSurface,
   onBackground,
-} from '../../constants.ts';
-import {useAppDispatch, useAppSelector} from '../redux/app/hooks.ts';
-import {clearCities, searchCity} from '../redux/features/weatherSlice.ts';
+  onSurface,
+  surface,
+} from '../../../constants.ts';
+import {useAppDispatch, useAppSelector} from '../../redux/app/hooks.ts';
+import {clearCities, searchCity} from '../../redux/features/weatherSlice.ts';
 import CityListItem from './CityListItem.tsx';
-import {Place} from '../models/place.ts';
+import {Place} from '../../models/place.ts';
 
 const searchIcon = searchIconFunction();
 
@@ -34,6 +33,7 @@ const SearchBar: FC = () => {
 
   const renderItem = ({item}: {item: Place}) => (
     <CityListItem
+      id={item.id}
       state={item.state}
       city_name={item.city_name}
       lat={item.lat}

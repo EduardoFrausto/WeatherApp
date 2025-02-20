@@ -7,3 +7,11 @@ export interface Place {
   long: string;
   result_type: string;
 }
+
+export interface SelectedCity {
+  id: number;
+  selectedLongitude: string;
+  selectedLatitude: string;
+  selectedCityName: string;
+  selectedCityState: string;
+}

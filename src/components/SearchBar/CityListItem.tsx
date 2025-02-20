@@ -1,22 +1,29 @@
 import React, {FC, memo} from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {borderRadius, onSurface, surface} from '../../constants.ts';
-import {useAppDispatch} from '../redux/app/hooks.ts';
-import {clearCities, setSelectedCity} from '../redux/features/weatherSlice.ts';
+import {borderRadius, onSurface, surface} from '../../../constants.ts';
+import {useAppDispatch} from '../../redux/app/hooks.ts';
+import {
+  clearCities,
+  searchWeather,
+  addSelectedCity,
+} from '../../redux/features/weatherSlice.ts';
 
 const CityListItem = memo<CityListItemProps>(
-  ({city_name, lat, long, state}) => {
+  ({city_name, lat, long, state, id}) => {
     const dispatch = useAppDispatch();
 
     const onSelectCity = () => {
       dispatch(
-        setSelectedCity({
+        addSelectedCity({
+          id: id,
           selectedCityName: city_name,
           selectedLatitude: lat,
           selectedLongitude: long,
+          selectedCityState: state,
         }),
       );
       dispatch(clearCities());
+      dispatch(searchWeather());
     };
 
     return (
@@ -30,6 +37,7 @@ const CityListItem = memo<CityListItemProps>(
 );
 
 interface CityListItemProps {
+  id: number;
   city_name: string;
   state: string;
   lat: string;
